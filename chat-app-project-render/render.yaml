@@ -1,0 +1,21 @@
+services:
+  - type: web
+    name: chat-backend
+    env: node
+    plan: free
+    buildCommand: 'npm install'
+    startCommand: 'node server.js'
+    envVars:
+      - key: MONGODB_URI
+        value: YOUR_MONGODB_CONNECTION_STRING
+
+  - type: web
+    name: chat-frontend
+    env: node
+    plan: free
+    buildCommand: 'npm install'
+    startCommand: 'npm start'
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /
